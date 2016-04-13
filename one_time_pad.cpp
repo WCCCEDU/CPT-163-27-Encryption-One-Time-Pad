@@ -1,8 +1,6 @@
 #include <fstream>
 #include "./one_time_pad.h"
 
-const int MODULAR_SCALE = 'Z';
-
 namespace one_time_pad{
     std::string load_file(std::string path) {
         std::ifstream file;

@@ -18,7 +18,6 @@ int main() {
 
     char letter_a_cypher = 'a';
     char letter_b_plain = 'b';
-
     char encoded = one_time_pad::modular_encode(letter_a_cypher, letter_b_plain);
     char confirmation = one_time_pad::modular_decode(encoded, letter_a_cypher);
 

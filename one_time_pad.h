@@ -1,4 +1,5 @@
 namespace one_time_pad{
+    const int MODULAR_SCALE = 'z';
     std::string load_file(std::string path);
     std::string encrypt(std::string key, std::string plain_text);
     std::string decrypt(std::string key, std::string encrypted);
