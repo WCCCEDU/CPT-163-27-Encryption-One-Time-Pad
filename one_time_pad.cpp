@@ -26,20 +26,19 @@ namespace one_time_pad{
         return plain_text;
     }
 
-    char modular_encode(char key_value, char plain_value) {
-        char sum = key_value + plain_value;
-        sum = modular_reduce(sum);
+    char modular_encode(int key_value, int plain_value) {
+        int sum = modular_reduce(key_value + plain_value);
         return sum;
     }
 
-    char modular_decode(char encoded_value, char key_value){
+    char modular_decode(int encoded_value, int key_value){
         key_value = modular_reduce(key_value);
         return encoded_value - key_value;
     }
 
-    char modular_reduce(char value){
+    int modular_reduce(int value){
         if(value > MODULAR_SCALE){
-            return modular_reduce(value - MODULAR_SCALE);
+            return value - MODULAR_SCALE;
         }else{
             return value;
         }
