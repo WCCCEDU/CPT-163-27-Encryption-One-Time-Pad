@@ -1,8 +1,6 @@
 #include <fstream>
 #include "./one_time_pad.h"
 
-const int MODULAR_SCALE = 'Z';
-
 namespace one_time_pad{
     std::string load_file(std::string path) {
         std::ifstream file;
@@ -28,18 +26,21 @@ namespace one_time_pad{
         return plain_text;
     }
 
-    char modular_encode(int key_value, int plain_value){
-        char sum = key_value + plain_value;
-        if(sum > MODULAR_SCALE){
-            sum -= MODULAR_SCALE;
-        }
+    char modular_encode(int key_value, int plain_value) {
+        int sum = modular_reduce(key_value + plain_value);
         return sum;
     }
 
     char modular_decode(int encoded_value, int key_value){
-        if(key_value > MODULAR_SCALE){
-            key_value -= MODULAR_SCALE;
+        key_value = modular_reduce(key_value);
+        return encoded_value - key_value;
+    }
+
+    int modular_reduce(int value){
+        if(value > MODULAR_SCALE){
+            return value - MODULAR_SCALE;
+        }else{
+            return value;
         }
-        return (char)(encoded_value - key_value);
     }
 }
